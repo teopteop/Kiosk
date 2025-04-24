@@ -1,4 +1,4 @@
-package lv1;
+package basic.lv4;
 
 public class Kiosk {
 

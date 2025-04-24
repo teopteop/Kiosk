@@ -1,10 +1,9 @@
-package lv1;
+package basic.lv4;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private List<List<MenuItem>> menuLists = new ArrayList<>();
     private List<MenuItem> menuList = new ArrayList<>();
 
     public List<MenuItem> getMenuList() {
@@ -15,5 +14,12 @@ public class Menu {
         menuList.add(menuItem);
     }
 
+    public void printMenuList(Menu menu){
+        int cnt = 1;
+        for(MenuItem m : menu.getMenuList()){
+            System.out.println(cnt + ". " + m.getItemName()+" | W "+m.getItemPrice()+" | "+m.getItemDescription());
+            cnt++;
+        }
+    }
 
 }

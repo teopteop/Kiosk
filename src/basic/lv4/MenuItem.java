@@ -1,4 +1,4 @@
-package lv1;
+package basic.lv4;
 
 public class MenuItem {
     private String itemName;
@@ -11,5 +11,15 @@ public class MenuItem {
         this.itemDescription = itemDescription;
     }
 
+    public String getItemName() {
+        return itemName;
+    }
 
+    public int getItemPrice() {
+        return itemPrice;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
 }
