@@ -32,9 +32,7 @@ public class Main {
                     break;
                 } else {
                     System.out.println("-------------------------------- ");
-                    System.out.println("당신이 선택한 메뉴: " + burgerName[choice-1]);
-                    System.out.println(
-                            (choice) + ". " + burgerName[choice-1] +
+                    System.out.println("당신이 선택한 메뉴: " + ". " + burgerName[choice-1] +
                                     " | W " + price[choice-1] + " | " + burgerDescription[choice-1]
                     );
                     System.out.println("-------------------------------- ");

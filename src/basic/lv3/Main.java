@@ -1,8 +1,6 @@
 package basic.lv3;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -38,11 +36,10 @@ public class Main {
                 } else {
                     System.out.println("--------------------------------");
                     MenuItem choose = hamburger.menuItemList.get(choice-1);
-                    System.out.println("당신이 선택한 메뉴: " + choose.menuName);
-                    System.out.println(
-                            (choice) + ". " + choose.menuName +
-                                    " | W " + choose.price +
-                                    " | " + choose.menuDescription
+                    System.out.println("당신이 선택한 메뉴: " + choose.menuName +
+                            ". " + choose.menuName +
+                            " | W " + choose.price +
+                            " | " + choose.menuDescription
                     );
                     System.out.println("--------------------------------");
                 }

@@ -1,12 +1,29 @@
 package basic.lv4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        Menu hamburger = new Menu();
-        Menu drink = new Menu();
-        hamburger.addMenuList(new MenuItem("치즈버거", 5400, "찐득한 치즈가 두 장 들어간 버거"));
-        hamburger.addMenuList(new MenuItem("치킨버거", 6200, "두툼한 치킨 패티가 들어간 버거"));
+        List<Menu> menus = new ArrayList<>();
+        Menu hamburger = new Menu("Burgers");
+        Menu drink = new Menu("Drinks");
+        Menu dessert = new Menu("Desserts");
 
-        hamburger.printMenuList(hamburger);
+        menus.add(hamburger);
+        menus.add(drink);
+        menus.add(dessert);
+
+        hamburger.addMenuItem(new MenuItem("ShackBurger", 6.9,
+                "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+        hamburger.addMenuItem(new MenuItem("SmokeShack", 8.9,
+                "베이컨 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
+        hamburger.addMenuItem(new MenuItem("Cheeseburger", 6.9,
+                "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
+        hamburger.addMenuItem(new MenuItem("Hamburger", 5.4,
+                "비프패티를 기반으로 야채가 들어간 기본버거"));
+
+        Kiosk kiosk = new Kiosk();
+        kiosk.start(menus);
     }
 }

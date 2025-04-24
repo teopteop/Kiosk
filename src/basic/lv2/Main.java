@@ -36,9 +36,7 @@ public class Main {
                 } else {
                     System.out.println("-------------------------------- ");
                     MenuItem choose = burgerList.get(choice-1);
-                    System.out.println("당신이 선택한 메뉴: " + choose.menuName);
-                    System.out.println(
-                            (choice) + ". " + choose.menuName +
+                    System.out.println("당신이 선택한 메뉴: " + ". " + choose.menuName +
                                     " | W " + choose.price +
                                     " | " + choose.menuDescription
                     );
