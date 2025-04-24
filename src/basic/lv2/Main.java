@@ -23,7 +23,7 @@ public class Main {
             System.out.println("[ SHAKESHACK MENU ]");
             int cnt = 1;
             for(MenuItem m : burgerList){
-                System.out.println(cnt + ". " + m.menuName + " | W "+m.price + " | "+m.menuDescription);
+                System.out.println(cnt + ". " + m.menuName + " | W "+ m.price + " | "+ m.menuDescription);
                 cnt++;
             }
             System.out.println("0. 종료  |  입력 시 종료됩니다.");
