@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-
     public void start(List<Menu> menus){
         Scanner sc = new Scanner(System.in);
 
