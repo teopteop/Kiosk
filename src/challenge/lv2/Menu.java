@@ -1,11 +1,11 @@
-package basic.lv5;
+package challenge.lv2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private final String category;
-    private final List<MenuItem> menuItemList = new ArrayList<>();
+    private String category;
+    private List<MenuItem> menuItemList = new ArrayList<>();
 
     Menu(String category){
         this.category = category;

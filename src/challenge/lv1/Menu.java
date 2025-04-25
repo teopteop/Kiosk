@@ -1,4 +1,4 @@
-package basic.lv5;
+package challenge.lv1;
 
 import java.util.ArrayList;
 import java.util.List;
