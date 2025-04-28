@@ -23,4 +23,10 @@ public class MenuItem {
         return itemDescription;
     }
 
+    public void chooseMenuItem(MenuItem m){
+        System.out.println("당신이 선택한 메뉴: " + m.getItemName() +
+                " | W " + m.getItemPrice() +
+                " | " + m.getItemDescription());
+    }
+
 }
