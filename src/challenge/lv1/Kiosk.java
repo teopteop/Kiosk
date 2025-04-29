@@ -6,13 +6,11 @@ import java.util.Scanner;
 
 public class Kiosk {
     private static final Scanner sc = new Scanner(System.in);
-
     public void start(List<Menu> menus){
         Order order = new Order();
-        Menu chooseMenu = null;
-        MenuItem chooseMenuItem = null;
-        int check = 0; //반복문의 상태를 조절하기 위한 변수
-        int choice = 0; //선택을 위한 변수
+        Menu chooseMenu;
+        MenuItem chooseMenuItem;
+        int choice = 0; //입력값을 받기 위한 변수
 
         while(true){
             System.out.println("[ MAIN MENU ]");
@@ -20,36 +18,32 @@ public class Kiosk {
                 System.out.println((i+1) + ". " + menus.get(i).getCategory());
             } System.out.println("0. 종료  |  입력 시 종료됩니다.");
 
-            if(order.getOrders().isEmpty()){ //첫실행, 주문목록이 비어있을때 흐름
+            if(order.getOrders().isEmpty()){ //첫실행, 주문 목록이 비어있을때
                 choice = getInput(0, menus.size()); //카테고리 선택
-                if(choice == 0) {
-                    break;
-                } else {
-                    chooseMenu = menus.get(choice-1);
-                    chooseMenu.printMenuItemList();
-                    chooseMenuItem = chooseMenu.getMenuItem(getInput(1, chooseMenu.getMenuItemList().size()));
-                    chooseMenuItem.printMenuItem();
-                    order.addOrder(getInput(1, 2), chooseMenuItem);
-                    continue;
-                }
+            } else { //주문 목록이 있을때
+                order.orderMenu(menus.size()); //주문메뉴 출력
+                choice = getInput(0, menus.size() + 2); //카테고리, 주문메뉴 항목 인덱스 +2
             }
 
-            //주문목록이 있을때 흐름
-            order.orderMenu(menus.size());
-
-            choice = getInput(0, menus.size()+2); //카테고리 선택
             if(choice == 0) {
                 break;
-            } else {
+            } else if(choice <= menus.size()){
                 chooseMenu = menus.get(choice-1);
                 chooseMenu.printMenuItemList();
-                chooseMenuItem = chooseMenu.getMenuItem(sc.nextInt());
+                chooseMenuItem = chooseMenu.getMenuItem(getInput(1, chooseMenu.getMenuItemList().size()));
                 chooseMenuItem.printMenuItem();
-                order.addOrder(sc.nextInt(), chooseMenuItem);
+                order.addOrder(getInput(1, 2), chooseMenuItem);
                 continue;
+            } else if(choice == menus.size()+1){
+                order.printOrders();
+                System.out.println("[ Total ]\nW " + order.getTotalPrice() + "\n\n1. 주문  |  2. 메뉴판");
             }
 
-
+            choice = getInput(1, 2);
+            if(choice == 1) {
+                System.out.println("주문이 완료되었습니다. 금액은 W " + order.getTotalPrice() + " 입니다.");
+                break;
+            }
         }
     }
 

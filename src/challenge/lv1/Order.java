@@ -28,14 +28,19 @@ public class Order {
         return i+2;
     }
 
-    public double printTotalPrice(){
-        double price = 0;
+    public void printOrders(){
+        System.out.println("\n[ ORDERS ]");
         for(MenuItem m : orders){
-
-            price += m.getItemPrice();
+            System.out.println(m.getItemName() + " | W " + m.getItemPrice() + " | " + m.getItemDescription());
         }
-        System.out.println("총 주문 금액은 W " + price + " 입니다.");
-        return price;
+    }
+
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for(MenuItem m : orders){
+            totalPrice += m.getItemPrice();
+        }
+        return totalPrice;
     }
 
 }
