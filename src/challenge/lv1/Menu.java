@@ -23,19 +23,20 @@ public class Menu {
         return menuItemList;
     }
 
-    public MenuItem getMenuItem(int choose) {
-        return menuItemList.get(choose-1);
+    public MenuItem getMenuItem(int choice) {
+        return menuItemList.get(choice-1);
     }
 
-    public static void printMenuItemList(Menu menu) {
-        System.out.println("[ " + menu.getCategory().toUpperCase() + " MENU ]");
-        for (int i = 0; i < menu.getMenuItemList().size(); i++) {
+    public void printMenuItemList() {
+        System.out.println("[ " + category.toUpperCase() + " MENU ]");
+        for (int i = 0; i < menuItemList.size(); i++) {
             System.out.println((i+1) + ". " +
-                    menu.getMenuItemList().get(i).getItemName() + " | W " +
-                    menu.getMenuItemList().get(i).getItemPrice() + " | " +
-                    menu.getMenuItemList().get(i).getItemDescription()
+                    menuItemList.get(i).getItemName() + " | W " +
+                    menuItemList.get(i).getItemPrice() + " | " +
+                    menuItemList.get(i).getItemDescription()
             );
         }
+        System.out.println("0  |  뒤로가기");
     }
 
 }

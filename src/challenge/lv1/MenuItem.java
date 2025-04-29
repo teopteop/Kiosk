@@ -23,10 +23,11 @@ public class MenuItem {
         return itemDescription;
     }
 
-    public void chooseMenuItem(MenuItem m){
-        System.out.println("당신이 선택한 메뉴: " + m.getItemName() +
-                " | W " + m.getItemPrice() +
-                " | " + m.getItemDescription());
+    public void printMenuItem(){
+        System.out.println("당신이 선택한 메뉴: " + itemName +
+                " | W " + itemPrice +
+                " | " + itemDescription +
+                "\n위 메뉴를 추가하시겠습니까?\n1. 확인  |  2. 취소");
     }
 
 }
