@@ -10,7 +10,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         List<MenuItem> burgerList = new ArrayList<>();
         burgerList.add(new MenuItem("ShackBurger", 6.9,
-                        "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+                "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
         burgerList.add(new MenuItem("SmokeShack", 8.9,
                 "베이컨 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
         burgerList.add(new MenuItem("Cheeseburger", 6.9,
@@ -18,12 +18,12 @@ public class Main {
         burgerList.add(new MenuItem("Hamburger", 5.4,
                 "비프패티를 기반으로 야채가 들어간 기본버거"));
 
-        while(true) {
+        while (true) {
 
             System.out.println("[ SHAKESHACK MENU ]");
             int cnt = 1;
-            for(MenuItem m : burgerList){
-                System.out.println(cnt + ". " + m.menuName + " | W "+ m.price + " | "+ m.menuDescription);
+            for (MenuItem m : burgerList) {
+                System.out.println(cnt + ". " + m.menuName + " | W " + m.price + " | " + m.menuDescription);
                 cnt++;
             }
             System.out.println("0. 종료  |  입력 시 종료됩니다.");
@@ -35,10 +35,10 @@ public class Main {
                     break;
                 } else {
                     System.out.println("-------------------------------- ");
-                    MenuItem choose = burgerList.get(choice-1);
+                    MenuItem choose = burgerList.get(choice - 1);
                     System.out.println("당신이 선택한 메뉴: " + ". " + choose.menuName +
-                                    " | W " + choose.price +
-                                    " | " + choose.menuDescription
+                            " | W " + choose.price +
+                            " | " + choose.menuDescription
                     );
                     System.out.println("-------------------------------- ");
                 }
@@ -47,7 +47,7 @@ public class Main {
                 System.out.println("숫자만 입력해주세요.");
                 System.out.println("-------------------------------- ");
                 sc.nextLine(); //버퍼 지우기
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("선택지를 확인하세요.");
                 System.out.println("-------------------------------- ");
             }

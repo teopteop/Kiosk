@@ -7,7 +7,7 @@ public class Menu {
     private final String category;
     private final List<MenuItem> menuItemList = new ArrayList<>();
 
-    Menu(String category){
+    Menu(String category) {
         this.category = category;
     }
 
@@ -24,7 +24,7 @@ public class Menu {
     }
 
     public MenuItem getMenuItem(int choice) {
-        return menuItemList.get(choice-1);
+        return menuItemList.get(choice - 1);
     }
 
 }

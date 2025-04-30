@@ -15,7 +15,7 @@ public class Main {
                 "비프패티를 기반으로 야채가 들어간 기본버거"
         };
 
-        while(true) {
+        while (true) {
 
             System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < burgerName.length; i++) {
@@ -32,8 +32,8 @@ public class Main {
                     break;
                 } else {
                     System.out.println("-------------------------------- ");
-                    System.out.println("당신이 선택한 메뉴: " + ". " + burgerName[choice-1] +
-                                    " | W " + price[choice-1] + " | " + burgerDescription[choice-1]
+                    System.out.println("당신이 선택한 메뉴: " + ". " + burgerName[choice - 1] +
+                            " | W " + price[choice - 1] + " | " + burgerDescription[choice - 1]
                     );
                     System.out.println("-------------------------------- ");
                 }
@@ -42,7 +42,7 @@ public class Main {
                 System.out.println("숫자만 입력해주세요.");
                 System.out.println("-------------------------------- ");
                 sc.nextLine(); //버퍼 지우기
-            } catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("선택지를 확인하세요.");
                 System.out.println("-------------------------------- ");
             }

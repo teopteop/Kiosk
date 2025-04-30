@@ -3,7 +3,6 @@ package challenge.lv2;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
@@ -41,7 +40,7 @@ public class Kiosk {
                 Consumer<List<MenuItem>> myConsumer1 = menuItemList -> {
                     IntStream.range(0, menuItemList.size()).forEach(i -> {
                         MenuItem m = menuItemList.get(i);
-                        System.out.println((i+1) + ". " + m.toString());
+                        System.out.println((i + 1) + ". " + m.toString());
                     });
                 };
                 myConsumer1.accept(chooseMenu.getMenuItemList());
@@ -73,17 +72,18 @@ public class Kiosk {
                 System.out.printf("주문이 완료되었습니다. 금액은 W %.2f 입니다.\n",
                         grade.discountPrice(order.getTotalPrice()));
                 break;
-            } else if(choice == 2) {
+            } else if (choice == 2) {
                 //삭제 기능 적용
                 BiFunction<String, List<MenuItem>, Boolean> myFunction1 = (inputString, orders) ->
-                    orders.removeIf(m -> inputString.equals(m.getItemName()));
+                        orders.removeIf(m -> inputString.equals(m.getItemName()));
                 sc.nextLine();//다음입력이 nextLine 이기에 버퍼 비우기
                 while (true) {
-                        System.out.println("삭제할 메뉴의 이름을 입력하세요.(대소문자 구분)");
-                        if(myFunction1.apply(sc.nextLine(), order.getOrders())){
-                            System.out.println("삭제 완료");
-                            break;
-                        } System.out.println("입력한 메뉴명을 확인해주세요.");
+                    System.out.println("삭제할 메뉴의 이름을 입력하세요.(대소문자 구분)");
+                    if (myFunction1.apply(sc.nextLine(), order.getOrders())) {
+                        System.out.println("삭제 완료");
+                        break;
+                    }
+                    System.out.println("입력한 메뉴명을 확인해주세요.");
                 }
             }
         }

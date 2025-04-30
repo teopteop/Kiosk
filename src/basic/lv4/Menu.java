@@ -7,7 +7,7 @@ public class Menu {
     String category;
     List<MenuItem> menuItemList = new ArrayList<>();
 
-    Menu(String category){
+    Menu(String category) {
         this.category = category;
     }
 
