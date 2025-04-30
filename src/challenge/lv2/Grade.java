@@ -9,4 +9,23 @@ public enum Grade {
         this.discountPercent = discountPercent;
     }
 
+    public double discountPrice(double price){
+        return price - (price*discountPercent);
+    }
+
+    public static Grade gradeChoice(int input){
+        switch (input){
+            case 1:
+                return Grade.VETERAN;
+            case 2:
+                return Grade.SOLDIER;
+            case 3:
+                return Grade.STUDENT;
+            case 4:
+                return Grade.BASIC;
+            default:
+                throw new IllegalArgumentException("선택지를 확인하세요");
+        }
+    }
+
 }

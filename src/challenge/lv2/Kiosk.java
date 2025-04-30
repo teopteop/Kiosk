@@ -5,72 +5,75 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
+    private static final Scanner sc = new Scanner(System.in);
     public void start(List<Menu> menus){
-        Scanner sc = new Scanner(System.in);
+        Order order = new Order();
+        Menu chooseMenu;
+        MenuItem chooseMenuItem;
+        int choice = 0; //입력값을 받기 위한 변수
 
-        while(true) {
-            try {
-                int cnt = 1; //반복 사용할 카운트 변수
-                System.out.println("[ MAIN MENU ]");
+        while(true){
+            System.out.println("[ MAIN MENU ]");
+            for (int i = 0; i < menus.size(); i++) {
+                System.out.println((i+1) + ". " + menus.get(i).getCategory());
+            } System.out.println("0. 종료  |  입력 시 종료됩니다.");
 
-                for (Menu m : menus) {
-                    System.out.println(cnt + ". " + m.getCategory());
-                    cnt++;
-                }
-
-                cnt = 1; // 카운트 초기화
-                System.out.println("0. 종료  |  입력 시 종료됩니다.");
-
-                int choice = sc.nextInt();
-                Menu chooseMenu;
-
-                if (choice == 0) {
-                    System.out.println("--------------------------------");
-                    System.out.println("프로그램을 종료합니다.");
-                    break;
-                } else {
-                    System.out.println("--------------------------------");
-                    chooseMenu = menus.get(choice-1);
-                    System.out.println("[ " + chooseMenu.getCategory().toUpperCase() + " MENU ]");
-
-                    for (MenuItem m : chooseMenu.getMenuItemList()) {
-                        System.out.println(cnt + ". " + m.getItemName() + " | W " +
-                                m.getItemPrice() + " | " + m.getItemDescription());
-                        cnt++;
-                    }
-
-                    System.out.println("0. 뒤로가기  |  입력 시 처음으로 돌아갑니다.");
-                    System.out.println("--------------------------------");
-                }
-
-                choice = sc.nextInt();
-                MenuItem chooseMenuItem;
-
-                if (choice == 0) {
-                    System.out.println("처음으로 돌아갑니다.");
-                    System.out.println("--------------------------------");
-                } else {
-                    System.out.println("--------------------------------");
-                    chooseMenuItem = chooseMenu.getMenuItemList().get(choice-1);
-                    System.out.println("당신이 선택한 메뉴: " + chooseMenuItem.getItemName() +
-                                    " | W " + chooseMenuItem.getItemPrice() +
-                                    " | " + chooseMenuItem.getItemDescription()
-                    );
-                    System.out.println("--------------------------------");
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println("숫자만 입력해주세요.");
-                System.out.println("--------------------------------");
-                sc.nextLine(); //버퍼 지우기
-            } catch (IndexOutOfBoundsException e){
-                System.out.println("선택지를 확인하세요.");
-                System.out.println("--------------------------------");
+            if(order.getOrders().isEmpty()){ //첫실행, 주문 목록이 비어있을때
+                choice = getInput(0, menus.size()); //카테고리 선택
+            } else { //주문 목록이 있을때
+                order.orderMenu(menus.size()); //주문메뉴 출력
+                choice = getInput(0, menus.size() + 2); //카테고리, 주문메뉴 항목 인덱스 +2
             }
 
+            if(choice == 0) {
+                break;
+            } else if(choice <= menus.size()){
+                chooseMenu = menus.get(choice-1);
+                chooseMenu.printMenuItemList();
+                chooseMenuItem = chooseMenu.getMenuItem(getInput(1, chooseMenu.getMenuItemList().size()));
+                chooseMenuItem.printMenuItem();
+                order.addOrder(getInput(1, 2), chooseMenuItem);
+                continue;
+            } else if(choice == menus.size()+1) {
+                order.printOrders();
+                System.out.println("[ Total ]\nW " + order.getTotalPrice() + "\n1. 주문  |  2. 메뉴판");
+            }
+
+            choice = getInput(1, 2);
+            if(choice == 1) {
+                //할인 기능 적용
+                System.out.println("할인 정보를 입력해주세요.\n" + "1. 국가유공자  :  10% \n" +
+                        "2. 군인  :  5%\n" + "3. 학생  :  3%\n" + "4. 일반  :  0%");
+                Grade grade = Grade.gradeChoice(getInput(1, 4));
+                System.out.println("주문이 완료되었습니다. 금액은 W " +
+                        grade.discountPrice(order.getTotalPrice()) + " 입니다.");
+                break;
+            }
         }
-        sc.close(); //스캐너 종료
+    }
+
+    public static int getInput(int firstIndex, int lastIndex){
+        while (true) {
+            try {
+                int input = sc.nextInt();
+                if (input < firstIndex || input > lastIndex){
+                    throw new IndexOutOfBoundsException();
+                }
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.println("숫자만 입력해주세요");
+                sc.nextLine(); //버퍼비우기 안비우면 큰일남
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("선택지를 확인해주세요");
+            }
+        }
     }
 }
+
+
+
+
+
+
 
 
