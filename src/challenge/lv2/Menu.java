@@ -27,16 +27,4 @@ public class Menu {
         return menuItemList.get(choice-1);
     }
 
-    public void printMenuItemList() {
-        System.out.println("[ " + category.toUpperCase() + " MENU ]");
-        for (int i = 0; i < menuItemList.size(); i++) {
-            System.out.println((i+1) + ". " +
-                    menuItemList.get(i).getItemName() + " | W " +
-                    menuItemList.get(i).getItemPrice() + " | " +
-                    menuItemList.get(i).getItemDescription()
-            );
-        }
-        System.out.println("0  |  뒤로가기");
-    }
-
 }

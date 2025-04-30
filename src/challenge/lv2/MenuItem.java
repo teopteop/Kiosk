@@ -23,11 +23,9 @@ public class MenuItem {
         return itemDescription;
     }
 
-    public void printMenuItem(){
-        System.out.println("당신이 선택한 메뉴: " + itemName +
-                " | W " + itemPrice +
-                " | " + itemDescription +
-                "\n위 메뉴를 추가하시겠습니까?\n1. 확인  |  2. 취소");
+    @Override
+    public String toString() { //간결한 출력을 위한 toString 메서드 오버라이딩
+        return itemName + " | W " + itemPrice + " | " + itemDescription;
     }
 
 }

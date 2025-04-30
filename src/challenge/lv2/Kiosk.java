@@ -3,44 +3,67 @@ package challenge.lv2;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 public class Kiosk {
     private static final Scanner sc = new Scanner(System.in);
-    public void start(List<Menu> menus){
+
+    public void start(List<Menu> menus) {
         Order order = new Order();
         Menu chooseMenu;
         MenuItem chooseMenuItem;
         int choice = 0; //입력값을 받기 위한 변수
 
-        while(true){
+        while (true) {
             System.out.println("[ MAIN MENU ]");
             for (int i = 0; i < menus.size(); i++) {
-                System.out.println((i+1) + ". " + menus.get(i).getCategory());
-            } System.out.println("0. 종료  |  입력 시 종료됩니다.");
+                System.out.println((i + 1) + ". " + menus.get(i).getCategory());
+            }
+            System.out.println("0. 종료  |  입력 시 종료됩니다.");
 
-            if(order.getOrders().isEmpty()){ //첫실행, 주문 목록이 비어있을때
+            if (order.getOrders().isEmpty()) { //첫실행, 주문 목록이 비어있을때
                 choice = getInput(0, menus.size()); //카테고리 선택
             } else { //주문 목록이 있을때
                 order.orderMenu(menus.size()); //주문메뉴 출력
                 choice = getInput(0, menus.size() + 2); //카테고리, 주문메뉴 항목 인덱스 +2
             }
 
-            if(choice == 0) {
+            if (choice == 0) {
                 break;
-            } else if(choice <= menus.size()){
-                chooseMenu = menus.get(choice-1);
-                chooseMenu.printMenuItemList();
+            } else if (choice <= menus.size()) {
+                chooseMenu = menus.get(choice - 1);
+                System.out.println("[ " + chooseMenu.getCategory().toUpperCase() + " MENU ]");
+
+                //menuItem 조회 forEach만 사용시 인덱스에 접근 불가능 -> IntStream 사용
+                Consumer<List<MenuItem>> m1 = menuItemList -> {
+                    IntStream.range(0, menuItemList.size()).forEach(i -> {
+                        MenuItem m = menuItemList.get(i);
+                        System.out.println((i+1) + ". " + m.toString());
+                    });
+                };
+                m1.accept(chooseMenu.getMenuItemList());
+                System.out.println("0.  뒤로가기");
+
                 chooseMenuItem = chooseMenu.getMenuItem(getInput(1, chooseMenu.getMenuItemList().size()));
-                chooseMenuItem.printMenuItem();
+
+                //선택한 item 출력
+                Consumer<MenuItem> m2 = (m) -> {
+                    System.out.println("당신이 선택한 메뉴: " + m.toString() +
+                            "\n위 메뉴를 추가하시겠습니까?\n1. 확인  |  2. 취소");
+                };
+                m2.accept(chooseMenuItem);
                 order.addOrder(getInput(1, 2), chooseMenuItem);
                 continue;
-            } else if(choice == menus.size()+1) {
+            } else if (choice == menus.size() + 1) {
                 order.printOrders();
-                System.out.println("[ Total ]\nW " + order.getTotalPrice() + "\n1. 주문  |  2. 메뉴판");
+                System.out.println("[ Total ]\nW " + order.getTotalPrice() +
+                        "\n1. 주문  |  2. 주문목록 삭제  |  3. 메뉴판 ");
             }
 
-            choice = getInput(1, 2);
-            if(choice == 1) {
+            choice = getInput(1, 3);
+            if (choice == 1) {
                 //할인 기능 적용
                 System.out.println("할인 정보를 입력해주세요.\n" + "1. 국가유공자  :  10% \n" +
                         "2. 군인  :  5%\n" + "3. 학생  :  3%\n" + "4. 일반  :  0%");
@@ -48,15 +71,18 @@ public class Kiosk {
                 System.out.println("주문이 완료되었습니다. 금액은 W " +
                         grade.discountPrice(order.getTotalPrice()) + " 입니다.");
                 break;
+            } else if(choice == 2) {
+                //삭제 기능 적용
+
             }
         }
     }
 
-    public static int getInput(int firstIndex, int lastIndex){
+    public static int getInput(int firstIndex, int lastIndex) {
         while (true) {
             try {
                 int input = sc.nextInt();
-                if (input < firstIndex || input > lastIndex){
+                if (input < firstIndex || input > lastIndex) {
                     throw new IndexOutOfBoundsException();
                 }
                 return input;
