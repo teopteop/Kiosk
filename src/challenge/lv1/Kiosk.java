@@ -29,14 +29,14 @@ public class Kiosk {
 
             if (choice == 0) {
                 break;
-            } else if (choice <= menus.size()) {
+            } else if (choice <= menus.size()) { //메뉴 출력 및 주문목록 추가
                 chooseMenu = menus.get(choice - 1);
                 chooseMenu.printMenuItemList();
                 chooseMenuItem = chooseMenu.getMenuItem(getInput(1, chooseMenu.getMenuItemList().size()));
                 chooseMenuItem.printMenuItem();
                 order.addOrder(getInput(1, 2), chooseMenuItem);
                 continue;
-            } else if (choice == menus.size() + 1) {
+            } else if (choice == menus.size() + 1) { //이하 주문시스템
                 order.printOrders();
                 System.out.println("[ Total ]\nW " + order.getTotalPrice() + "\n\n1. 주문  |  2. 메뉴판");
             }
